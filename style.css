@@ -33,3 +33,9 @@ button {
 button:hover {
   background-color: rgba(231, 179, 103, 0.621);
 }
+
+.disable {
+  opacity: 0.3;
+  cursor: none;
+  cursor: not-allowed;
+}

@@ -14,9 +14,9 @@ function getUsers(page) {
       return responseData.json();
     })
     .then((response) => {
+      const fragment = new DocumentFragment();
       const data = response.data;
       totalPages = response.total_pages;
-      console.log(totalPages);
       data.forEach((element) => {
         const li = document.createElement("li");
         const nameP = document.createElement("p");
@@ -25,14 +25,26 @@ function getUsers(page) {
         avatarImg.src = element.avatar;
         li.appendChild(avatarImg);
         li.append(nameP);
-        ul.appendChild(li);
+        fragment.appendChild(li);
       });
+      ul.appendChild(fragment);
     })
     .catch((error) => {
       let h1 = document.createElement("h1");
       h1.textContent = "Server problem 😣";
       document.body.appendChild(h1);
     });
+
+  if (currentPage === 1) {
+    loadprev.classList.add("disable");
+    loadnext.classList.remove("disable");
+  } else if ((currentPage = totalPages)) {
+    loadnext.classList.add("disable");
+    loadprev.classList.remove("disable");
+  } else {
+    loadnext.classList.remove("disable");
+    loadprev.classList.remove("disable");
+  }
 }
 getUsers(currentPage);
 loadnext.addEventListener("click", () => {
@@ -43,6 +55,7 @@ loadnext.addEventListener("click", () => {
   currentPage++;
   getUsers(currentPage);
 });
+
 loadprev.addEventListener("click", () => {
   if (currentPage === 1) {
     return;
