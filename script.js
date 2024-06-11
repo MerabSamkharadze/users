@@ -10,12 +10,10 @@ fetch("https://reqres.in/api/users?page=", { method: "GET" })
   })
   .then((response) => {
     const data = response.data;
-    console.log(data);
     data.forEach((element) => {
       const li = document.createElement("li");
       const nameP = document.createElement("p");
       nameP.textContent = `${element.first_name} ${element.last_name}`;
-      console.log(nameP);
       const avatarImg = document.createElement("img");
       avatarImg.src = element.avatar;
       li.appendChild(avatarImg);
