@@ -6,6 +6,7 @@ const loadprev = document.getElementById("loadprev");
 let currentPage = 1;
 let totalPages;
 function getUsers(page) {
+  addLoader();
   fetch("https://reqres.in/api/users?page=" + page, { method: "GET" })
     .then((responseData) => {
       if (!responseData.ok) {
@@ -33,6 +34,9 @@ function getUsers(page) {
       let h1 = document.createElement("h1");
       h1.textContent = "Server problem 😣";
       document.body.appendChild(h1);
+    })
+    .finally(() => {
+      hideLoader();
     });
 
   if (currentPage === 1) {
@@ -64,3 +68,11 @@ loadprev.addEventListener("click", () => {
   currentPage--;
   getUsers(currentPage);
 });
+
+function hideLoader() {
+  document.querySelector(".loader_box").style.display = "none";
+}
+
+function addLoader() {
+  document.querySelector(".loader_box").style.display = "bloc";
+}

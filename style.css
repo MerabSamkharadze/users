@@ -35,7 +35,16 @@ button:hover {
 }
 
 .disable {
-  opacity: 0.3;
+  color: rgba(128, 128, 128, 0.601);
   cursor: none;
   cursor: not-allowed;
+}
+.loader_box {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blueviolet;
 }
